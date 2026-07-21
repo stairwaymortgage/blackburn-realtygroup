@@ -937,17 +937,31 @@ import { IMAGES } from '../data/images';
 
       .hero { padding: 100px 18px 100px; }
 
-      .flag-grid { gap: 7px; padding: 0; }
+      /* Two cards per row, each stacking flag-over-name, centered.
+         Grid + width:100% + box-sizing:border-box keeps both cards inside
+         the viewport; constraining .flag-img stops the 160px source image
+         from forcing the card wider than its column (the overflow culprit). */
+      .flag-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+      }
       .flag-btn {
-        width: calc(50% - 4px);
-        flex-direction: row;
+        width: 100%;
+        box-sizing: border-box;
+        flex-direction: column;
         align-items: center;
-        gap: 14px;
-        padding: 13px 16px;
+        text-align: center;
+        gap: 8px;
+        padding: 14px 10px;
         border-radius: 8px;
       }
-      .flag-emoji { font-size: 2rem; flex-shrink: 0; }
-      .flag-label { font-size: 0.72rem; letter-spacing: 0.08em; text-align: left; color: var(--silver-light); }
+      .flag-img { width: 52px; height: auto; max-width: 100%; }
+      .flag-emoji { font-size: 2rem; }
+      .flag-label { font-size: 0.72rem; letter-spacing: 0.08em; text-align: center; color: var(--silver-light); }
 
       .keyes-strip { padding: 56px 22px; }
       .keyes-stats { flex-direction: column; gap: 32px; }
