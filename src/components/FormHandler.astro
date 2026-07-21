@@ -59,6 +59,13 @@
         data.page_url = window.location.href;
         data.submitted_at = new Date().toISOString();
 
+        // Permanent Blackburn Realty branding on every lead (distinguishes
+        // these from Stairway Mortgage leads in GHL), plus per-form tags.
+        data.brand = 'Blackburn Realty Group';
+        data.source_site = 'blackburnrealtygroup.com';
+        data.tag = 'blackburn-realty';
+        data.tags = 'blackburn-realty,blackburn-realty-' + (data.source || 'website');
+
         // Validate: need a first name and a valid email.
         if (!data.first_name) {
           showError(btn, 'Please enter your first name.');
