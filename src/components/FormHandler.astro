@@ -67,9 +67,34 @@
         data.tags = 'blackburn-realty,blackburn-realty-' + (data.source || 'website');
 
         // Mirror values into the exact GHL custom-field keys so they populate.
+        // General fields (sent on every lead):
         data.blackburnrealty_source = data.source || 'website';
         data.blackburnrealty_language = data.language || '';
         data.blackburn_realty_message = data.message || '';
+        data.blackburnrealty_brand = data.brand || '';
+        data.blackburnrealty_source_site = data.source_site || '';
+        data.blackburnrealty_page_url = data.page_url || '';
+        data.blackburnrealty_submitted_at = data.submitted_at || '';
+
+        // Folder (per-form) fields — only sent when the form has that field.
+        // Pre-Approval
+        if (data.loan_type) data.blackburnrealty_loan_type = data.loan_type;
+        if (data.price_range) data.blackburnrealty_price_range = data.price_range;
+        if (data.down_payment) data.blackburnrealty_down_payment = data.down_payment;
+        if (data.buying_location) data.blackburnrealty_buying_location = data.buying_location;
+        // Property Search
+        if (data.region) data.blackburnrealty_region = data.region;
+        if (data.property_type) data.blackburnrealty_property_type = data.property_type;
+        if (data.timeline) data.blackburnrealty_timeline = data.timeline;
+        // Home Value
+        if (data.property_address) data.blackburnrealty_property_address = data.property_address;
+        if (data.square_footage) data.blackburnrealty_square_footage = data.square_footage;
+        if (data.beds_baths) data.blackburnrealty_beds_baths = data.beds_baths;
+        if (data.selling_timeline) data.blackburnrealty_selling_timeline = data.selling_timeline;
+        // Consultation
+        if (data.topic) data.blackburnrealty_topic = data.topic;
+        if (data.call_format) data.blackburnrealty_call_format = data.call_format;
+        if (data.preferred_time) data.blackburnrealty_preferred_time = data.preferred_time;
 
         // Validate: need a first name and a valid email.
         if (!data.first_name) {
