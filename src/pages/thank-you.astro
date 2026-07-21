@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  theme="story"
+  title="Thank You | Blackburn Realty Group"
+  description="Your message has been received. A member of the Blackburn Realty Group team will personally reach out within one business day, in your language."
+>
+
+<section class="ty-section">
+  <div class="ty-glow"></div>
+  <div class="ty-inner">
+    <p class="ty-eyebrow">Message Received</p>
+    <h1 class="ty-title">Thank you. <em>We&rsquo;ve got it.</em></h1>
+    <p class="ty-body">A member of our team will personally reach out within one business day &mdash; in your language. Yours is already in good hands.</p>
+    <div class="ty-buttons">
+      <a href="/" class="btn-primary">Return Home</a>
+      <a href="/ladies/" class="btn-secondary">Meet Our Agents</a>
+    </div>
+    <p class="ty-note">For urgent matters, please call us directly.</p>
+  </div>
+</section>
+
+</BaseLayout>
+
+<style is:global>
+  .ty-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 82vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 160px 32px 120px;
+  }
+  .ty-glow {
+    position: absolute;
+    left: 50%; top: 42%;
+    transform: translate(-50%, -50%);
+    width: 900px; height: 600px;
+    max-width: 130vw;
+    background: radial-gradient(ellipse at center, rgba(var(--theme-rgb), 0.16), transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ty-inner { position: relative; z-index: 1; max-width: 720px; }
+  .ty-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.4em;
+    color: var(--theme);
+    text-transform: uppercase;
+    margin-bottom: 26px;
+  }
+  .ty-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    margin-bottom: 28px;
+  }
+  .ty-title em { font-style: italic; color: var(--theme); }
+  .ty-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+    color: var(--silver);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 40px;
+  }
+  .ty-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .ty-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1rem;
+    color: var(--silver-dark);
+  }
+
+  @media (max-width: 860px) {
+    .ty-section { min-height: 70vh; padding: 130px 22px 90px; }
+    .ty-buttons { flex-direction: column; }
+    .ty-buttons .btn-primary,
+    .ty-buttons .btn-secondary { width: 100%; }
+  }
+</style>

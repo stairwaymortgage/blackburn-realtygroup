@@ -1,0 +1,92 @@
+---
+// FormHandler.astro — client-side lead capture.
+// Posts submissions from any [data-ghl-form] container to the GoHighLevel
+// inbound webhook. This component renders NO visible markup — only an
+// is:inline script (kept inline so Astro doesn't bundle/transform it).
+//
+// To reuse on another form: add `data-ghl-form data-source="<name>"` to its
+// container, give each field a `name`, and add `ghl-submit` to its button.
+---
+<script is:inline>
+  (function () {
+    // ── The one line to change if the webhook ever moves ──
+    const WEBHOOK = 'https://services.leadconnectorhq.com/hooks/ipRIuBMrlyPNaFSXDz3q/webhook-trigger/0fa660f1-bc9c-4d29-a853-2afa2fa57c9e';
+
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Inline status/error line, sits directly below the submit button.
+    function statusEl(btn) {
+      let el = btn.parentElement.querySelector('.ghl-status');
+      if (!el) {
+        el = document.createElement('p');
+        el.className = 'ghl-status';
+        el.setAttribute('role', 'status');
+        el.style.fontFamily = "'Barlow', sans-serif";
+        el.style.fontWeight = '400';
+        el.style.fontSize = '0.9rem';
+        el.style.lineHeight = '1.5';
+        el.style.marginTop = '14px';
+        el.style.textAlign = 'center';
+        btn.insertAdjacentElement('afterend', el);
+      }
+      return el;
+    }
+    function showError(btn, msg) {
+      const el = statusEl(btn);
+      el.textContent = msg;
+      el.style.color = '#f28482';
+    }
+    function clearStatus(btn) {
+      const el = btn.parentElement.querySelector('.ghl-status');
+      if (el) el.textContent = '';
+    }
+
+    document.querySelectorAll('[data-ghl-form]').forEach(function (container) {
+      const btn = container.querySelector('.ghl-submit');
+      if (!btn) return;
+      const originalText = btn.textContent;
+
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        clearStatus(btn);
+
+        // Collect every descendant field that has a name attribute.
+        const data = {};
+        container.querySelectorAll('[name]').forEach(function (field) {
+          data[field.name] = (field.value || '').trim();
+        });
+        data.source = container.getAttribute('data-source') || '';
+        data.page_url = window.location.href;
+        data.submitted_at = new Date().toISOString();
+
+        // Validate: need a first name and a valid email.
+        if (!data.first_name) {
+          showError(btn, 'Please enter your first name.');
+          return;
+        }
+        if (!EMAIL_RE.test(data.email || '')) {
+          showError(btn, 'Please enter a valid email address.');
+          return;
+        }
+
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+
+        fetch(WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error('Request failed: ' + res.status);
+            window.location.href = '/thank-you/';
+          })
+          .catch(function () {
+            btn.textContent = originalText;
+            btn.disabled = false;
+            showError(btn, 'Something went wrong… please try again or call us.');
+          });
+      });
+    });
+  })();
+</script>

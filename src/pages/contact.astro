@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FormHandler from '../components/FormHandler.astro';
 import { IMAGES, SHOW_IMAGE_LABELS } from '../data/images';
 ---
 
@@ -60,7 +61,7 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../data/images';
     </div>
   </div>
 
-  <div class="form-card">
+  <div class="form-card" data-ghl-form data-source="contact">
     <p class="form-card-eyebrow">Send a Message</p>
     <h2 class="form-card-title">How can we <em>help you?</em></h2>
     <p class="form-card-sub">Complete the form below and a member of our team will respond within one business day. For urgent matters, please call.</p>
@@ -68,28 +69,28 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../data/images';
     <div class="form-row">
       <div class="form-field">
         <label class="form-label">First Name</label>
-        <input type="text" class="form-input" placeholder="Jane" />
+        <input type="text" name="first_name" class="form-input" placeholder="Jane" />
       </div>
       <div class="form-field">
         <label class="form-label">Last Name</label>
-        <input type="text" class="form-input" placeholder="Doe" />
+        <input type="text" name="last_name" class="form-input" placeholder="Doe" />
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-field">
         <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" placeholder="you@email.com" />
+        <input type="email" name="email" class="form-input" placeholder="you@email.com" />
       </div>
       <div class="form-field">
         <label class="form-label">Phone</label>
-        <input type="tel" class="form-input" placeholder="(305) 555-0123" />
+        <input type="tel" name="phone" class="form-input" placeholder="(305) 555-0123" />
       </div>
     </div>
 
     <div class="form-field">
       <label class="form-label">Preferred Language</label>
-      <select class="form-select">
+      <select name="language" class="form-select">
         <option>English</option>
         <option>Spanish / Espanol</option>
         <option>Portuguese / Portugues</option>
@@ -103,7 +104,7 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../data/images';
 
     <div class="form-field">
       <label class="form-label">Reason for Contact</label>
-      <select class="form-select">
+      <select name="reason" class="form-select">
         <option>General Inquiry</option>
         <option>Buying Property in Florida</option>
         <option>Selling Florida Property</option>
@@ -116,10 +117,10 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../data/images';
 
     <div class="form-field">
       <label class="form-label">Message</label>
-      <textarea class="form-textarea" placeholder="Tell us how we can help..."></textarea>
+      <textarea name="message" class="form-textarea" placeholder="Tell us how we can help..."></textarea>
     </div>
 
-    <button class="btn-primary form-submit">Send Message</button>
+    <button class="btn-primary form-submit ghl-submit">Send Message</button>
   </div>
 </div>
 
@@ -140,6 +141,8 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../data/images';
   <a href="/tools/preapproval/" class="mobile-sticky-btn">Get Pre-Approved</a>
   <a href="/tools/homevalue/" class="mobile-sticky-btn">Home Value</a>
 </div>
+
+<FormHandler />
 
 </BaseLayout>
 
