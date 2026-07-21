@@ -1,0 +1,37 @@
+---
+// CTAStrip.astro — reusable bottom call-to-action strip.
+// Used on most pages with slightly different copy per context.
+export interface Props {
+  eyebrow?: string;
+  headlineLead?: string;
+  headlineEm?: string;
+  body?: string;
+  primaryText?: string;
+  primaryHref?: string;
+  secondaryText?: string;
+  secondaryHref?: string;
+}
+
+const {
+  eyebrow = "Ready to Begin?",
+  headlineLead = "Florida",
+  headlineEm = "welcomes you.",
+  body = "Whether you are buying, selling, or simply exploring — start with a free conversation in your language. No obligation. No pressure.",
+  primaryText = "Book a Consultation",
+  primaryHref = "/tools/consultation/",
+  secondaryText = "Find an Agent",
+  secondaryHref = "/ladies/",
+} = Astro.props;
+---
+
+<section class="cta-strip">
+  <div class="cta-strip-inner">
+    <p class="cta-strip-eyebrow">{eyebrow}</p>
+    <h2 class="cta-strip-headline">{headlineLead} <em>{headlineEm}</em></h2>
+    <p class="cta-strip-body">{body}</p>
+    <div class="cta-buttons">
+      <a href={primaryHref} class="btn-primary">{primaryText}</a>
+      <a href={secondaryHref} class="btn-secondary">{secondaryText}</a>
+    </div>
+  </div>
+</section>

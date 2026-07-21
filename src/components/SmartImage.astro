@@ -1,0 +1,51 @@
+---
+// SmartImage.astro — renders a manifest image with an optional intent label.
+// STOCK images show a caption band (their `intent`) while SHOW_IMAGE_LABELS
+// is on, so you can audit for wrong shots. TEAM photos (real Olga/Jim) are
+// approved and always render clean with proper alt text — no label.
+import { SHOW_IMAGE_LABELS, type SiteImage } from '../data/images';
+
+export interface Props {
+  image: SiteImage;
+  alt?: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { image, alt, class: cls = '', loading = 'lazy' } = Astro.props;
+const showLabel = SHOW_IMAGE_LABELS && !image.team;
+const altText = alt ?? image.alt ?? image.intent;
+---
+
+<div class={`smart-img ${cls}`}>
+  <img src={image.src} alt={altText} loading={loading} />
+  {showLabel && (
+    <div class="smart-img-label">
+      <span class="smart-img-tag">Image slot</span>
+      <span class="smart-img-intent">{image.intent}</span>
+    </div>
+  )}
+</div>
+
+<style>
+  .smart-img { position: relative; overflow: hidden; width: 100%; height: 100%; }
+  .smart-img > img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .smart-img-label {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 10px 14px;
+    background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.55) 70%, transparent);
+    display: flex; flex-direction: column; gap: 3px;
+    pointer-events: none;
+  }
+  .smart-img-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.56rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--theme);
+  }
+  .smart-img-intent {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.72rem; line-height: 1.35; color: #fff;
+  }
+</style>

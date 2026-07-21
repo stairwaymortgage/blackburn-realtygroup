@@ -1,0 +1,61 @@
+---
+// Footer.astro — the single source of truth for the site footer.
+// Edit contact info, links, disclaimers — all in this one file.
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="brg-footer">
+  <div class="brg-footer-inner">
+    <div class="brg-footer-grid">
+      <!-- Brand column -->
+      <div>
+        <div class="brg-footer-brand">Blackburn Realty Group</div>
+        <p class="brg-footer-tagline">Florida's front door to the world.<br />50 languages. 1 standard. 1 team.</p>
+        <p class="brg-footer-keyes">
+          A Division of The Keyes Company<br />
+          Established 1926 · #1 Independent Brokerage in Florida<br />
+          60+ Offices · 4,000+ Agents Statewide
+        </p>
+      </div>
+
+      <!-- Find an Agent -->
+      <div class="brg-footer-col">
+        <p class="brg-footer-col-title">Our Team</p>
+        <ul>
+          <li><a href="/ladies/">Meet the Ladies</a></li>
+          <li><a href="/guys/">Meet the Guys</a></li>
+          <li><a href="/about/">Our Story</a></li>
+          <li><a href="/keyes/">The Keyes Company</a></li>
+        </ul>
+      </div>
+
+      <!-- Tools & Resources -->
+      <div class="brg-footer-col">
+        <p class="brg-footer-col-title">Tools</p>
+        <ul>
+          <li><a href="/tools/preapproval/">Get Pre-Approved</a></li>
+          <li><a href="/tools/property/">Find a Property</a></li>
+          <li><a href="/tools/homevalue/">Home Value Report</a></li>
+          <li><a href="/tools/consultation/">Free Consultation</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="brg-footer-col">
+        <p class="brg-footer-col-title">Contact</p>
+        <ul>
+          <li><a href="/contact/">Contact Us</a></li>
+          <li>Fort Lauderdale, Florida</li>
+          <li>(305) 555-0100</li>
+          <li>info@blackburnrealtygroup.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="brg-footer-bottom">
+      <div>&copy; {currentYear} Blackburn Realty Group · All Rights Reserved</div>
+      <div>Equal Housing Opportunity · Licensed in Florida</div>
+    </div>
+  </div>
+</footer>

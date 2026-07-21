@@ -1,0 +1,92 @@
+---
+// Nav.astro — the single source of truth for the site header.
+// Edit menu items, add dropdowns, change the logo — all in this one file.
+export interface Props {
+  active?: string;
+}
+const { active } = Astro.props;
+---
+
+<nav class="brg-nav">
+  <a href="/" class="brg-nav-logo" id="navLogo">Blackburn Realty Group</a>
+
+  <div class="brg-nav-menu">
+    <!-- ABOUT -->
+    <div class="brg-nav-item has-dropdown">
+      <span>About</span>
+      <div class="brg-nav-dropdown">
+        <a href="/about/">Our Story</a>
+        <a href="/keyes/">The Keyes Company</a>
+        <a href="/contact/">Contact Us</a>
+      </div>
+    </div>
+
+    <!-- FIND AN AGENT -->
+    <div class="brg-nav-item has-dropdown">
+      <span>Find an Agent</span>
+      <div class="brg-nav-dropdown">
+        <a href="/ladies/">Meet the Ladies</a>
+        <a href="/guys/">Meet the Guys</a>
+      </div>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="brg-nav-item has-dropdown">
+      <span>Tools</span>
+      <div class="brg-nav-dropdown align-right">
+        <a href="/tools/preapproval/">Get Pre-Approved</a>
+        <a href="/tools/property/">Find a Property</a>
+        <a href="/tools/homevalue/">Home Value Report</a>
+        <a href="/tools/consultation/">Schedule a Consultation</a>
+      </div>
+    </div>
+
+    <!-- DIY -->
+    <div class="brg-nav-item has-dropdown">
+      <span>DIY Guides</span>
+      <div class="brg-nav-dropdown align-right">
+        <a href="/diy/sell/">Sell Your Home</a>
+        <a href="/diy/improve/">Improve Your Home</a>
+        <a href="/diy/buy/">Buy Without Agent</a>
+        <a href="/diy/finance/">Secure Financing</a>
+      </div>
+    </div>
+
+    <!-- BLOG -->
+    <a href="/blog/" class="brg-nav-item">Blog</a>
+  </div>
+
+  <button class="brg-menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+</nav>
+
+<!-- Mobile sticky bottom bar — appears under 860px -->
+<div class="brg-mobile-bar">
+  <div class="brg-mobile-bar-inner">
+    <a href="/ladies/">Find Agent</a>
+    <a href="/tools/preapproval/">Pre-Approval</a>
+    <a href="/tools/homevalue/">Home Value</a>
+  </div>
+</div>
+
+<script>
+  // Logo scroll-fade effect
+  const navLogo = document.getElementById('navLogo');
+  if (navLogo) {
+    const heroSection = document.querySelector('section, main, .breadcrumb');
+    if (heroSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.intersectionRatio < 0.9) {
+            navLogo.classList.add('is-visible');
+          } else {
+            navLogo.classList.remove('is-visible');
+          }
+        });
+      }, { threshold: [0, 0.9, 1] });
+      observer.observe(heroSection);
+    } else {
+      // Fallback — show immediately if no hero
+      navLogo.classList.add('is-visible');
+    }
+  }
+</script>
