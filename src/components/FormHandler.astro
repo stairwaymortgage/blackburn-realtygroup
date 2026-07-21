@@ -66,6 +66,11 @@
         data.tag = 'blackburn-realty';
         data.tags = 'blackburn-realty,blackburn-realty-' + (data.source || 'website');
 
+        // Mirror values into the exact GHL custom-field keys so they populate.
+        data.blackburnrealty_source = data.source || 'website';
+        data.blackburnrealty_language = data.language || '';
+        data.blackburn_realty_message = data.message || '';
+
         // Validate: need a first name and a valid email.
         if (!data.first_name) {
           showError(btn, 'Please enter your first name.');
