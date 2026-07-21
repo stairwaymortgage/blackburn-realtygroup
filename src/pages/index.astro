@@ -273,9 +273,7 @@ import { IMAGES } from '../data/images';
     /* Dropdown */
 
     /* Right-aligned dropdowns for menu items near the right edge of screen */
-    .nav-item:nth-last-child(-n+3) 
 
-    .nav-item:hover 
 
 
     .nav-dropdown a:last-child { border-bottom: none; }
@@ -965,5 +963,22 @@ import { IMAGES } from '../data/images';
       .section-join { padding: 80px 22px; }
 
       .translate-toast { bottom: 80px; }
+    }
+
+    /* ═══ Responsive polish — appended last so it wins the cascade ═══ */
+    @media (max-width: 1024px) {
+      .diy-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 860px) {
+      .hero { padding: 100px 22px 90px; }
+      /* Scale the uppercase wordmark so "BLACKBURN" never clips at the edges */
+      .hero-title { font-size: clamp(3.4rem, 15vw, 5.5rem); letter-spacing: 0.02em; }
+      .hero-title-sub { font-size: clamp(1.9rem, 8vw, 3.2rem); letter-spacing: 0.06em; }
+    }
+    @media (max-width: 600px) {
+      .hero-title { font-size: clamp(2.9rem, 15vw, 4rem); }
+      .hero-title-sub { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+      .tagline-line { letter-spacing: 0.2em; font-size: clamp(0.85rem, 4vw, 1.2rem); }
+      .diy-grid { grid-template-columns: 1fr; }
     }
 </style>

@@ -156,12 +156,7 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
 
 <style is:global>
     .nav-item > a:hover { color: var(--white); }
-    .nav-item.active > 
-    .nav-item.active-ladies > 
-    .nav-item.active-guys > 
     
-    .nav-item:nth-last-child(-n+3) 
-    .nav-item:hover 
     .nav-dropdown a:last-child { border-bottom: none; }
     .nav-dropdown a:hover { color: var(--white); background: rgba(255,255,255,0.03); padding-left: 30px; }
     .nav-dropdown a.ladies { border-left: 2px solid var(--pink); }
@@ -637,4 +632,17 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
     }
     .reveal.is-in { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    /* ═══ Responsive polish — appended last so it wins the cascade ═══ */
+    @media (max-width: 860px) {
+      .form-input, .form-select, .form-textarea { font-size: 16px; } /* prevent iOS zoom-on-focus */
+      .benefit-cell { padding: 26px 22px; }
+    }
+    @media (max-width: 600px) {
+      .diy-hero { padding: 88px 20px 36px; }
+      .pdf-mockup { max-width: 280px; }
+      .form-card { padding: 30px 20px; }
+      .form-submit { width: 100%; }
+    }
+
 </style>

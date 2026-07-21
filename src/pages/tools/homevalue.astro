@@ -140,12 +140,7 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
 
 <style is:global>
     .nav-item > a:hover { color: var(--white); }
-    .nav-item.active > 
-    .nav-item.active-ladies > 
-    .nav-item.active-guys > 
     
-    .nav-item:nth-last-child(-n+3) 
-    .nav-item:hover 
     .nav-dropdown a:last-child { border-bottom: none; }
     .nav-dropdown a:hover { color: var(--white); background: rgba(255,255,255,0.03); padding-left: 30px; }
     .nav-dropdown a.ladies { border-left: 2px solid var(--pink); }
@@ -406,7 +401,19 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
       letter-spacing: 0.22em; color: var(--silver-dark);
       text-transform: uppercase; margin-bottom: 8px;
     }
-    .form-input, .form-select, .form-textare
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      font-size: 16px; /* >=16px prevents iOS zoom-on-focus */
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-textarea { min-height: 130px; resize: vertical; }
+    .form-select { -webkit-appearance: none; appearance: none; }
     .form-input:focus, .form-select:focus, .form-textarea:focus {
       outline: none; border-color: var(--theme);
       background: rgba(255,255,255,0.02);
@@ -490,4 +497,29 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
     }
     .reveal.is-in { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    /* ═══ Responsive polish — appended last so it wins the cascade ═══ */
+    @media (max-width: 1024px) {
+      .tool-form-section { grid-template-columns: 1fr; gap: 48px; }
+      .promise-strip { grid-template-columns: 1fr; }
+      .promise-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .promise-cell:last-child { border-bottom: none; }
+    }
+    @media (max-width: 860px) {
+      .tool-hero { padding: 104px 22px 52px; }
+      .promise-strip { padding: 30px 22px 40px; }
+      .promise-cell { padding: 28px 18px; }
+      .tool-form-section { padding: 56px 22px; gap: 40px; }
+      .form-card { padding: 32px 22px; }
+      .form-row { grid-template-columns: 1fr; }
+      .testimonial-section { padding: 50px 22px; }
+      .section { padding: 56px 22px; }
+      .page-hero { padding: 100px 22px 40px; }
+    }
+    @media (max-width: 600px) {
+      .tool-hero { padding: 98px 20px 46px; }
+      .tool-hero-sub { font-size: 1.15rem; }
+      .form-submit { width: 100%; }
+    }
+
 </style>

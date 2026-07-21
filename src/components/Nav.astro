@@ -56,8 +56,57 @@ const { active } = Astro.props;
     <a href="/blog/" class="brg-nav-item">Blog</a>
   </div>
 
-  <button class="brg-menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+  <button class="brg-menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
 </nav>
+
+<!-- Mobile slide-in menu — full navigation for touch devices (under 860px) -->
+<div class="brg-mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="brg-mobile-menu-inner">
+    <!-- ABOUT -->
+    <div class="brg-mm-group">
+      <button class="brg-mm-header" aria-expanded="false">About</button>
+      <div class="brg-mm-sub">
+        <a href="/about/">Our Story</a>
+        <a href="/keyes/">The Keyes Company</a>
+        <a href="/contact/">Contact Us</a>
+      </div>
+    </div>
+
+    <!-- FIND AN AGENT -->
+    <div class="brg-mm-group">
+      <button class="brg-mm-header" aria-expanded="false">Find an Agent</button>
+      <div class="brg-mm-sub">
+        <a href="/ladies/">Meet the Ladies</a>
+        <a href="/guys/">Meet the Guys</a>
+      </div>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="brg-mm-group">
+      <button class="brg-mm-header" aria-expanded="false">Tools</button>
+      <div class="brg-mm-sub">
+        <a href="/tools/preapproval/">Get Pre-Approved</a>
+        <a href="/tools/property/">Find a Property</a>
+        <a href="/tools/homevalue/">Home Value Report</a>
+        <a href="/tools/consultation/">Schedule a Consultation</a>
+      </div>
+    </div>
+
+    <!-- DIY -->
+    <div class="brg-mm-group">
+      <button class="brg-mm-header" aria-expanded="false">DIY Guides</button>
+      <div class="brg-mm-sub">
+        <a href="/diy/sell/">Sell Your Home</a>
+        <a href="/diy/improve/">Improve Your Home</a>
+        <a href="/diy/buy/">Buy Without Agent</a>
+        <a href="/diy/finance/">Secure Financing</a>
+      </div>
+    </div>
+
+    <!-- BLOG -->
+    <a href="/blog/" class="brg-mm-link">Blog</a>
+  </div>
+</div>
 
 <!-- Mobile sticky bottom bar — appears under 860px -->
 <div class="brg-mobile-bar">
@@ -88,5 +137,43 @@ const { active } = Astro.props;
       // Fallback — show immediately if no hero
       navLogo.classList.add('is-visible');
     }
+  }
+
+  // Mobile menu drawer
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (menuToggle && mobileMenu) {
+    const setOpen = (open) => {
+      mobileMenu.classList.toggle('is-open', open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+      mobileMenu.setAttribute('aria-hidden', String(!open));
+      menuToggle.textContent = open ? '✕' : '☰';
+      menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      document.body.classList.toggle('menu-open', open);
+    };
+    menuToggle.addEventListener('click', () => {
+      setOpen(!mobileMenu.classList.contains('is-open'));
+    });
+    // Close when a real link is tapped
+    mobileMenu.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => setOpen(false));
+    });
+    // Accordion section headers
+    mobileMenu.querySelectorAll('.brg-mm-header').forEach((header) => {
+      header.addEventListener('click', () => {
+        const group = header.parentElement;
+        const wasOpen = group.classList.contains('is-expanded');
+        group.classList.toggle('is-expanded', !wasOpen);
+        header.setAttribute('aria-expanded', String(!wasOpen));
+      });
+    });
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) setOpen(false);
+    });
+    // Reset if resized up to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 860 && mobileMenu.classList.contains('is-open')) setOpen(false);
+    });
   }
 </script>
