@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormHandler from '../../components/FormHandler.astro';
 import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
 ---
 
@@ -54,32 +55,32 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
     </div>
   </div>
 
-  <div class="form-card">
+  <div class="form-card" data-ghl-form data-source="consultation">
     <div class="form-row">
       <div class="form-field">
         <label class="form-label">First Name</label>
-        <input type="text" class="form-input" placeholder="Jane" />
+        <input type="text" name="first_name" class="form-input" placeholder="Jane" />
       </div>
       <div class="form-field">
         <label class="form-label">Last Name</label>
-        <input type="text" class="form-input" placeholder="Doe" />
+        <input type="text" name="last_name" class="form-input" placeholder="Doe" />
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-field">
         <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" placeholder="you@email.com" />
+        <input type="email" name="email" class="form-input" placeholder="you@email.com" />
       </div>
       <div class="form-field">
         <label class="form-label">Phone</label>
-        <input type="tel" class="form-input" placeholder="(305) 555-0123" />
+        <input type="tel" name="phone" class="form-input" placeholder="(305) 555-0123" />
       </div>
     </div>
 
     <div class="form-field">
       <label class="form-label">Preferred Language</label>
-      <select class="form-select">
+      <select name="language" class="form-select">
         <option>English</option>
         <option>Spanish / Espanol</option>
         <option>Portuguese / Portugues</option>
@@ -91,9 +92,9 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
       </select>
     </div>
 
-    <div class="form-field"><label class="form-label">What would you like to discuss?</label><select class="form-select"><option>Buying a Florida property</option><option>Selling a Florida property</option><option>Financing options / Pre-approval</option><option>Investing in Florida real estate</option><option>Foreign National purchase</option><option>Multiple topics</option><option>Just exploring my options</option></select></div><div class="form-field"><label class="form-label">Preferred Call Format</label><select class="form-select"><option>Video (Zoom)</option><option>Phone call</option><option>Either is fine</option></select></div><div class="form-field"><label class="form-label">Preferred Time Window</label><select class="form-select"><option>Weekday mornings (8 AM - 12 PM EST)</option><option>Weekday afternoons (12 PM - 5 PM EST)</option><option>Weekday evenings (5 PM - 8 PM EST)</option><option>Weekends</option><option>Flexible / I will work around you</option></select></div><div class="form-field"><label class="form-label">Anything we should know before the call?</label><textarea class="form-textarea" placeholder="Specific questions, timeline, location, or context that will make the conversation more useful..."></textarea></div>
+    <div class="form-field"><label class="form-label">What would you like to discuss?</label><select name="topic" class="form-select"><option>Buying a Florida property</option><option>Selling a Florida property</option><option>Financing options / Pre-approval</option><option>Investing in Florida real estate</option><option>Foreign National purchase</option><option>Multiple topics</option><option>Just exploring my options</option></select></div><div class="form-field"><label class="form-label">Preferred Call Format</label><select name="call_format" class="form-select"><option>Video (Zoom)</option><option>Phone call</option><option>Either is fine</option></select></div><div class="form-field"><label class="form-label">Preferred Time Window</label><select name="preferred_time" class="form-select"><option>Weekday mornings (8 AM - 12 PM EST)</option><option>Weekday afternoons (12 PM - 5 PM EST)</option><option>Weekday evenings (5 PM - 8 PM EST)</option><option>Weekends</option><option>Flexible / I will work around you</option></select></div><div class="form-field"><label class="form-label">Anything we should know before the call?</label><textarea name="message" class="form-textarea" placeholder="Specific questions, timeline, location, or context that will make the conversation more useful..."></textarea></div>
 
-    <button class="btn-primary form-submit">Schedule My Call</button>
+    <button class="btn-primary form-submit ghl-submit">Schedule My Call</button>
     <p class="form-privacy">Your info stays private &middot; Used only for this request &middot; No spam, ever</p>
   </div>
 </section>
@@ -135,6 +136,8 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
     els.forEach(function (e) { io.observe(e); });
   })();
 </script>
+
+<FormHandler />
 
 </BaseLayout>
 

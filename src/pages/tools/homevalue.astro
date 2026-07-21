@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormHandler from '../../components/FormHandler.astro';
 import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
 ---
 
@@ -54,32 +55,32 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
     </div>
   </div>
 
-  <div class="form-card">
+  <div class="form-card" data-ghl-form data-source="home-value">
     <div class="form-row">
       <div class="form-field">
         <label class="form-label">First Name</label>
-        <input type="text" class="form-input" placeholder="Jane" />
+        <input type="text" name="first_name" class="form-input" placeholder="Jane" />
       </div>
       <div class="form-field">
         <label class="form-label">Last Name</label>
-        <input type="text" class="form-input" placeholder="Doe" />
+        <input type="text" name="last_name" class="form-input" placeholder="Doe" />
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-field">
         <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" placeholder="you@email.com" />
+        <input type="email" name="email" class="form-input" placeholder="you@email.com" />
       </div>
       <div class="form-field">
         <label class="form-label">Phone</label>
-        <input type="tel" class="form-input" placeholder="(305) 555-0123" />
+        <input type="tel" name="phone" class="form-input" placeholder="(305) 555-0123" />
       </div>
     </div>
 
     <div class="form-field">
       <label class="form-label">Preferred Language</label>
-      <select class="form-select">
+      <select name="language" class="form-select">
         <option>English</option>
         <option>Spanish / Espanol</option>
         <option>Portuguese / Portugues</option>
@@ -91,9 +92,9 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
       </select>
     </div>
 
-    <div class="form-field"><label class="form-label">Property Address</label><input type="text" class="form-input" placeholder="123 Ocean Drive, Miami Beach, FL" /></div><div class="form-field"><label class="form-label">Property Type</label><select class="form-select"><option>Single-family home</option><option>Condominium</option><option>Townhouse</option><option>Multi-family</option><option>Vacant land</option><option>Other</option></select></div><div class="form-field"><label class="form-label">Approximate Square Footage</label><input type="text" class="form-input" placeholder="2,400 sqft" /></div><div class="form-field"><label class="form-label">Bedrooms / Bathrooms</label><input type="text" class="form-input" placeholder="3 bed / 2.5 bath" /></div><div class="form-field"><label class="form-label">When are you considering selling?</label><select class="form-select"><option>Within 30 days</option><option>Within 3 months</option><option>Within 6 months</option><option>Within 1 year</option><option>Just curious / Not sure yet</option></select></div><div class="form-field"><label class="form-label">Anything special about your home?</label><textarea class="form-textarea" placeholder="Recent renovations, waterfront, pool, lot size, views, etc."></textarea></div>
+    <div class="form-field"><label class="form-label">Property Address</label><input type="text" name="property_address" class="form-input" placeholder="123 Ocean Drive, Miami Beach, FL" /></div><div class="form-field"><label class="form-label">Property Type</label><select name="property_type" class="form-select"><option>Single-family home</option><option>Condominium</option><option>Townhouse</option><option>Multi-family</option><option>Vacant land</option><option>Other</option></select></div><div class="form-field"><label class="form-label">Approximate Square Footage</label><input type="text" name="square_footage" class="form-input" placeholder="2,400 sqft" /></div><div class="form-field"><label class="form-label">Bedrooms / Bathrooms</label><input type="text" name="beds_baths" class="form-input" placeholder="3 bed / 2.5 bath" /></div><div class="form-field"><label class="form-label">When are you considering selling?</label><select name="selling_timeline" class="form-select"><option>Within 30 days</option><option>Within 3 months</option><option>Within 6 months</option><option>Within 1 year</option><option>Just curious / Not sure yet</option></select></div><div class="form-field"><label class="form-label">Anything special about your home?</label><textarea name="message" class="form-textarea" placeholder="Recent renovations, waterfront, pool, lot size, views, etc."></textarea></div>
 
-    <button class="btn-primary form-submit">Get My Free Report</button>
+    <button class="btn-primary form-submit ghl-submit">Get My Free Report</button>
     <p class="form-privacy">Your info stays private &middot; Used only for this request &middot; No spam, ever</p>
   </div>
 </section>
@@ -135,6 +136,8 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
     els.forEach(function (e) { io.observe(e); });
   })();
 </script>
+
+<FormHandler />
 
 </BaseLayout>
 

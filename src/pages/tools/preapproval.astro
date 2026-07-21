@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormHandler from '../../components/FormHandler.astro';
 import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
 ---
 
@@ -54,32 +55,32 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
     </div>
   </div>
 
-  <div class="form-card">
+  <div class="form-card" data-ghl-form data-source="pre-approval">
     <div class="form-row">
       <div class="form-field">
         <label class="form-label">First Name</label>
-        <input type="text" class="form-input" placeholder="Jane" />
+        <input type="text" name="first_name" class="form-input" placeholder="Jane" />
       </div>
       <div class="form-field">
         <label class="form-label">Last Name</label>
-        <input type="text" class="form-input" placeholder="Doe" />
+        <input type="text" name="last_name" class="form-input" placeholder="Doe" />
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-field">
         <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" placeholder="you@email.com" />
+        <input type="email" name="email" class="form-input" placeholder="you@email.com" />
       </div>
       <div class="form-field">
         <label class="form-label">Phone</label>
-        <input type="tel" class="form-input" placeholder="(305) 555-0123" />
+        <input type="tel" name="phone" class="form-input" placeholder="(305) 555-0123" />
       </div>
     </div>
 
     <div class="form-field">
       <label class="form-label">Preferred Language</label>
-      <select class="form-select">
+      <select name="language" class="form-select">
         <option>English</option>
         <option>Spanish / Espanol</option>
         <option>Portuguese / Portugues</option>
@@ -91,9 +92,9 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
       </select>
     </div>
 
-    <div class="form-field"><label class="form-label">Loan Type Interest</label><select class="form-select"><option>Not sure yet — please advise</option><option>Conventional 30-year</option><option>Conventional 15-year</option><option>FHA</option><option>VA (Veteran)</option><option>Jumbo</option><option>DSCR (Investor)</option><option>Foreign National</option></select></div><div class="form-field"><label class="form-label">Estimated Purchase Price</label><select class="form-select"><option>Under $200,000</option><option>$200,000 - $400,000</option><option>$400,000 - $600,000</option><option>$600,000 - $1M</option><option>$1M - $2M</option><option>$2M - $5M</option><option>Over $5M</option></select></div><div class="form-field"><label class="form-label">Estimated Down Payment %</label><select class="form-select"><option>3-5%</option><option>10%</option><option>15-20%</option><option>25-30%</option><option>30%+</option><option>Cash buyer (no loan needed)</option></select></div><div class="form-field"><label class="form-label">Where in Florida are you buying?</label><input type="text" class="form-input" placeholder="Miami, Orlando, Tampa, etc." /></div>
+    <div class="form-field"><label class="form-label">Loan Type Interest</label><select name="loan_type" class="form-select"><option>Not sure yet — please advise</option><option>Conventional 30-year</option><option>Conventional 15-year</option><option>FHA</option><option>VA (Veteran)</option><option>Jumbo</option><option>DSCR (Investor)</option><option>Foreign National</option></select></div><div class="form-field"><label class="form-label">Estimated Purchase Price</label><select name="price_range" class="form-select"><option>Under $200,000</option><option>$200,000 - $400,000</option><option>$400,000 - $600,000</option><option>$600,000 - $1M</option><option>$1M - $2M</option><option>$2M - $5M</option><option>Over $5M</option></select></div><div class="form-field"><label class="form-label">Estimated Down Payment %</label><select name="down_payment" class="form-select"><option>3-5%</option><option>10%</option><option>15-20%</option><option>25-30%</option><option>30%+</option><option>Cash buyer (no loan needed)</option></select></div><div class="form-field"><label class="form-label">Where in Florida are you buying?</label><input type="text" name="buying_location" class="form-input" placeholder="Miami, Orlando, Tampa, etc." /></div>
 
-    <button class="btn-primary form-submit">Start My Pre-Approval</button>
+    <button class="btn-primary form-submit ghl-submit">Start My Pre-Approval</button>
     <p class="form-privacy">Your info stays private &middot; Used only for this request &middot; No spam, ever</p>
   </div>
 </section>
@@ -135,6 +136,8 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
     els.forEach(function (e) { io.observe(e); });
   })();
 </script>
+
+<FormHandler />
 
 </BaseLayout>
 
