@@ -285,6 +285,15 @@ body.menu-open .brg-mobile-bar { display: none; }
    Suppressed globally to avoid duplicate/stacked sticky bars on mobile. */
 .mobile-sticky { display: none !important; }
 
+/* Form select dropdown options — the open option list gets a white background
+   from the OS/browser, so force dark text to keep it readable. The closed field
+   keeps its dark-theme / light-text styling; only the option list is affected. */
+.form-select option,
+.form-select optgroup {
+  color: #1a1a1a;
+  background: #ffffff;
+}
+
 /* Mobile sticky bottom bar */
 .brg-mobile-bar {
   display: none;
