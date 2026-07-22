@@ -65,6 +65,8 @@
         data.source_site = 'blackburnrealtygroup.com';
         data.tag = 'blackburn-realty';
         data.tags = 'blackburn-realty,blackburn-realty-' + (data.source || 'website');
+        // Single form-specific tag on its own key (for GHL "Add Contact Tag").
+        data.tag_form = 'blackburn-realty-' + (data.source || 'website');
 
         // Mirror values into the exact GHL custom-field keys so they populate.
         // General fields (sent on every lead):
