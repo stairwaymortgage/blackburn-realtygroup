@@ -26,7 +26,7 @@ export interface SiteImage {
 
 // Draws a label band over STOCK images so you can audit for wrong
 // shots. Team photos never show a label. Set false before deploy.
-export const SHOW_IMAGE_LABELS = true;
+export const SHOW_IMAGE_LABELS = false;
 
 const px = (id: string, w = 1200) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
