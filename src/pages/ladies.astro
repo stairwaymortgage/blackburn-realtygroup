@@ -1229,10 +1229,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .agent-card:hover .agent-photo { transform: scale(1.05); filter: grayscale(0%); }
 
-    /* branded placeholder shown on every card until real agents are photographed.
+    /* branded placeholder — hidden by default; the onerror handler adds
+       .photo-pending to reveal it only when an agent photo fails to load.
        Theme-driven, so ladies picks up pink and guys picks up turquoise. */
     .agent-photo-fallback {
-      display: flex;
+      display: none;
       position: absolute; inset: 0;
       flex-direction: column; align-items: center; justify-content: center; gap: 10px;
       text-align: center; padding: 12px;
