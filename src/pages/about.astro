@@ -247,7 +247,7 @@ import { IMAGES } from '../data/images';
   .story-split-img :global(.smart-img) { height: 100%; }
   .story-split-img :global(.smart-img img) {
     width: 100%; height: 100%; min-height: 340px;
-    object-fit: cover; display: block;
+    object-fit: cover; object-position: center 32%; display: block;
     filter: saturate(1.02) contrast(1.02);
     transition: transform 0.9s cubic-bezier(0.2,0.7,0.2,1);
   }
@@ -317,7 +317,9 @@ import { IMAGES } from '../data/images';
   .story-invite {
     position: relative; overflow: hidden;
     padding: 130px 32px; text-align: center;
-    background: var(--invite-img) center 40% / cover no-repeat fixed;
+    /* jim-olga-pool-1.jpg: both stand full-length, faces high in the portrait,
+       so bias the crop upward from 40% to keep both faces in the banner. */
+    background: var(--invite-img) center 28% / cover no-repeat fixed;
   }
   .story-invite-veil {
     position: absolute; inset: 0;

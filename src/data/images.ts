@@ -66,9 +66,9 @@ export const IMAGES = {
     credit: 'Blackburn Realty Group',
   },
   aboutInvite: {
-    src: team('olga-red-fulllength.png'),
-    intent: 'Olga Blackburn, full-length portrait — warm, welcoming close.',
-    alt: 'Olga Blackburn, Founder of Blackburn Realty Group',
+    src: team('jim-olga-pool-1.jpg'),
+    intent: 'Jim and Olga Blackburn poolside against the Miami skyline — a warm welcome to Florida.',
+    alt: 'Jim and Olga Blackburn, founders of Blackburn Realty Group, poolside with the Miami skyline behind them',
     team: true,
     credit: 'Blackburn Realty Group',
   },
