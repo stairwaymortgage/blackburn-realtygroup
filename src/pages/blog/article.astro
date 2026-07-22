@@ -96,10 +96,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <div class="article-share">
   <span class="share-label">Share This Article</span>
   <div class="share-buttons">
-    <a href="#" class="share-btn">LinkedIn</a>
-    <a href="#" class="share-btn">Twitter</a>
-    <a href="#" class="share-btn">Facebook</a>
-    <a href="#" class="share-btn">Email</a>
+    <a class="share-btn" data-share="linkedin">LinkedIn</a>
+    <a class="share-btn" data-share="twitter">Twitter</a>
+    <a class="share-btn" data-share="facebook">Facebook</a>
+    <a class="share-btn" data-share="email">Email</a>
   </div>
 </div>
 
@@ -167,6 +167,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     if (!('IntersectionObserver' in window)) { els.forEach(function(e){e.classList.add('is-in');}); return; }
     var io = new IntersectionObserver(function(entries){ entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('is-in'); io.unobserve(en.target);} }); }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
     els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+
+<script is:inline>
+  // Build share links from the live page URL + title at runtime (static template).
+  (function () {
+    var url = encodeURIComponent(window.location.href);
+    var title = document.title || 'Blackburn Realty Group';
+    var etitle = encodeURIComponent(title);
+    var targets = {
+      linkedin: 'https://www.linkedin.com/sharing/share-offsite/?url=' + url,
+      twitter: 'https://twitter.com/intent/tweet?url=' + url + '&text=' + etitle,
+      facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + url,
+      email: 'mailto:?subject=' + etitle + '&body=' + etitle + '%20' + url
+    };
+    document.querySelectorAll('.share-btn[data-share]').forEach(function (a) {
+      var key = a.getAttribute('data-share');
+      if (!targets[key]) return;
+      a.setAttribute('href', targets[key]);
+      if (key !== 'email') { a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener'); }
+    });
   })();
 </script>
 
