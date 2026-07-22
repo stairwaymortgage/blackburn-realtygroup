@@ -140,9 +140,9 @@ export const IMAGES = {
 
   // ─── THE KEYES COMPANY (heritage library · bronze) ───
   keyesHero: {
-    src: team('olga-jim-skyline-tall.jpg'),
-    intent: 'Olga and Jim Blackburn together against the Miami skyline — Florida-rooted leadership.',
-    alt: 'Olga and Jim Blackburn against the Miami skyline',
+    src: team('jim-olga-balcony-pointing.jpg'),
+    intent: 'Olga and Jim Blackburn reviewing plans on a downtown balcony above a rising Florida skyline — hands-on, Florida-rooted leadership.',
+    alt: 'Olga and Jim Blackburn reviewing plans on a balcony overlooking a developing Florida skyline',
     team: true,
     credit: 'Blackburn Realty Group',
   },

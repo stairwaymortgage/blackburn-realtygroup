@@ -425,12 +425,13 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../data/images';
       position: relative; overflow: hidden;
       min-height: 74vh; display: flex; align-items: center; justify-content: center;
       text-align: center; padding: 140px 32px 90px;
-      background: var(--keyes-hero-img) center 40% / cover no-repeat;
+      background: var(--keyes-hero-img) center 50% / cover no-repeat;
     }
     .keyes-hero-veil {
       position: absolute; inset: 0;
       background:
-        linear-gradient(180deg, rgba(6,6,6,0.66) 0%, rgba(6,6,6,0.82) 60%, var(--black) 100%),
+        linear-gradient(180deg, rgba(6,6,6,0.70) 0%, rgba(6,6,6,0.85) 58%, var(--black) 100%),
+        radial-gradient(ellipse at 50% 52%, rgba(6,6,6,0.55), transparent 60%),
         radial-gradient(ellipse at 50% 8%, rgba(var(--theme-rgb),0.18), transparent 55%);
     }
     .keyes-hero-inner { position: relative; max-width: 820px; }
