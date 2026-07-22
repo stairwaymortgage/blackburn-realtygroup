@@ -479,7 +479,10 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
       padding: 130px 32px 90px;
       text-align: center;
       overflow: hidden;
-      background: var(--tool-hero-img) center 38% / cover no-repeat;
+      /* Page-specific: this hero photo (jim-olga-balcony-looking.jpg) sits with
+         Jim's face high in the landscape frame, so shift up from the shared 38%
+         default to keep both Jim's and Olga's faces fully in view. */
+      background: var(--tool-hero-img) center 15% / cover no-repeat;
     }
     .tool-hero::before {
       content: ''; position: absolute; inset: 0;
