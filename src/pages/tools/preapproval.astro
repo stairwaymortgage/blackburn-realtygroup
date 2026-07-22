@@ -479,7 +479,10 @@ import { IMAGES, SHOW_IMAGE_LABELS } from '../../data/images';
       padding: 130px 32px 90px;
       text-align: center;
       overflow: hidden;
-      background: var(--tool-hero-img) center 38% / cover no-repeat;
+      /* Page-specific: this hero photo (jim-balcony-laptop-1.jpg) is a tall
+         portrait with the subject high in frame, so shift up from the shared
+         38% default to keep Jim's full face in view. */
+      background: var(--tool-hero-img) center 20% / cover no-repeat;
     }
     .tool-hero::before {
       content: ''; position: absolute; inset: 0;
