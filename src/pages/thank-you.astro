@@ -11,6 +11,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="ty-section">
   <div class="ty-glow"></div>
   <div class="ty-inner">
+    <div class="ty-download" id="ty-download" hidden>
+      <p class="ty-dl-eyebrow">Your Guide Is Ready</p>
+      <h2 class="ty-dl-title" id="ty-dl-title">Your guide is on its way.</h2>
+      <a class="btn-primary ty-dl-btn" id="ty-dl-btn" href="#" download>Download Your Guide</a>
+      <p class="ty-dl-note">Your copy is downloading now &mdash; we&rsquo;ve also emailed it to you.</p>
+    </div>
     <p class="ty-eyebrow">Message Received</p>
     <h1 class="ty-title">Thank you. <em>We&rsquo;ve got it.</em></h1>
     <p class="ty-body">A member of our team will personally reach out within one business day &mdash; in your language. Yours is already in good hands.</p>
@@ -23,6 +29,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </section>
 
 </BaseLayout>
+
+<script is:inline>
+  (function () {
+    // Map each DIY form source to the guide it promised.
+    var GUIDES = {
+      'diy-sell':    { pdf: '/pdfs/blackburn-diy-01-sell-your-home.pdf',      title: 'Your Sell-Your-Home guide is on its way.' },
+      'diy-improve': { pdf: '/pdfs/blackburn-diy-02-improve-your-home.pdf',   title: 'Your Improve-Your-Home guide is on its way.' },
+      'diy-buy':     { pdf: '/pdfs/blackburn-diy-03-buy-without-agent.pdf',    title: 'Your Buy-Without-an-Agent guide is on its way.' },
+      'diy-finance': { pdf: '/pdfs/blackburn-diy-04-secure-best-financing.pdf', title: 'Your Secure-Best-Financing guide is on its way.' }
+    };
+
+    var source = new URLSearchParams(window.location.search).get('source');
+    var guide = source ? GUIDES[source] : null;
+    if (!guide) return; // Non-DIY or unknown source: leave the page untouched.
+
+    var block = document.getElementById('ty-download');
+    var btn = document.getElementById('ty-dl-btn');
+    var title = document.getElementById('ty-dl-title');
+    if (!block || !btn) return;
+
+    btn.setAttribute('href', guide.pdf);
+    if (title) title.textContent = guide.title;
+    block.hidden = false;
+
+    // Kick off the download automatically; the visible button is the fallback.
+    var a = document.createElement('a');
+    a.href = guide.pdf;
+    a.setAttribute('download', '');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  })();
+</script>
 
 <style is:global>
   .ty-section {
@@ -46,6 +85,46 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     z-index: 0;
   }
   .ty-inner { position: relative; z-index: 1; max-width: 720px; }
+
+  /* DIY guide download block — only shown for diy-* sources */
+  .ty-download {
+    border: 1px solid rgba(var(--theme-rgb), 0.28);
+    background: rgba(var(--theme-rgb), 0.05);
+    border-radius: 4px;
+    padding: 40px 32px 44px;
+    margin-bottom: 52px;
+  }
+  .ty-dl-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.4em;
+    color: var(--theme);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .ty-dl-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--white);
+    line-height: 1.08;
+    letter-spacing: 0.01em;
+    margin-bottom: 30px;
+  }
+  .ty-dl-btn {
+    background: var(--theme);
+    border-color: var(--theme);
+    color: var(--black);
+  }
+  .ty-dl-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.05rem;
+    color: var(--silver);
+    margin-top: 24px;
+  }
   .ty-eyebrow {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 500;

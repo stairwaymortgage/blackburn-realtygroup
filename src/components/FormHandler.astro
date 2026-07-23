@@ -118,7 +118,10 @@
         })
           .then(function (res) {
             if (!res.ok) throw new Error('Request failed: ' + res.status);
-            window.location.href = '/thank-you/';
+            var src = container.getAttribute('data-source') || '';
+            window.location.href = src
+              ? '/thank-you/?source=' + encodeURIComponent(src)
+              : '/thank-you/';
           })
           .catch(function () {
             btn.textContent = originalText;
