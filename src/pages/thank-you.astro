@@ -12,10 +12,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="ty-glow"></div>
   <div class="ty-inner">
     <div class="ty-download" id="ty-download" hidden>
-      <p class="ty-dl-eyebrow">Your Guide Is Ready</p>
-      <h2 class="ty-dl-title" id="ty-dl-title">Your guide is on its way.</h2>
-      <a class="btn-primary ty-dl-btn" id="ty-dl-btn" href="#" download>Download Your Guide</a>
-      <p class="ty-dl-note">Your copy is downloading now &mdash; we&rsquo;ve also emailed it to you.</p>
+      <p class="ty-dl-eyebrow">Your Guide Is On Its Way</p>
+      <h2 class="ty-dl-title" id="ty-dl-title">Your guide is headed to your inbox.</h2>
+      <p class="ty-dl-note">Check your inbox &mdash; we&rsquo;ve just sent your guide to the email you provided. (If you don&rsquo;t see it in a few minutes, check your spam folder.)</p>
     </div>
     <p class="ty-eyebrow">Message Received</p>
     <h1 class="ty-title">Thank you. <em>We&rsquo;ve got it.</em></h1>
@@ -32,34 +31,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <script is:inline>
   (function () {
-    // Map each DIY form source to the guide it promised.
+    // Map each DIY form source to the guide it promised. The PDF itself is
+    // emailed from GoHighLevel — nothing is downloaded here, so we only need
+    // the headline that names the guide the lead asked for.
     var GUIDES = {
-      'diy-sell':    { pdf: '/pdfs/blackburn-diy-01-sell-your-home.pdf',      title: 'Your Sell-Your-Home guide is on its way.' },
-      'diy-improve': { pdf: '/pdfs/blackburn-diy-02-improve-your-home.pdf',   title: 'Your Improve-Your-Home guide is on its way.' },
-      'diy-buy':     { pdf: '/pdfs/blackburn-diy-03-buy-without-agent.pdf',    title: 'Your Buy-Without-an-Agent guide is on its way.' },
-      'diy-finance': { pdf: '/pdfs/blackburn-diy-04-secure-best-financing.pdf', title: 'Your Secure-Best-Financing guide is on its way.' }
+      'diy-sell':    'Your Sell-Your-Home guide is headed to your inbox.',
+      'diy-improve': 'Your Improve-Your-Home guide is headed to your inbox.',
+      'diy-buy':     'Your Buy-Without-an-Agent guide is headed to your inbox.',
+      'diy-finance': 'Your Secure-Best-Financing guide is headed to your inbox.'
     };
 
     var source = new URLSearchParams(window.location.search).get('source');
-    var guide = source ? GUIDES[source] : null;
-    if (!guide) return; // Non-DIY or unknown source: leave the page untouched.
+    var guideTitle = source ? GUIDES[source] : null;
+    if (!guideTitle) return; // Non-DIY or unknown source: leave the page untouched.
 
     var block = document.getElementById('ty-download');
-    var btn = document.getElementById('ty-dl-btn');
     var title = document.getElementById('ty-dl-title');
-    if (!block || !btn) return;
+    if (!block) return;
 
-    btn.setAttribute('href', guide.pdf);
-    if (title) title.textContent = guide.title;
+    if (title) title.textContent = guideTitle;
     block.hidden = false;
-
-    // Kick off the download automatically; the visible button is the fallback.
-    var a = document.createElement('a');
-    a.href = guide.pdf;
-    a.setAttribute('download', '');
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
   })();
 </script>
 
@@ -86,7 +77,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
   .ty-inner { position: relative; z-index: 1; max-width: 720px; }
 
-  /* DIY guide download block — only shown for diy-* sources */
+  /* DIY guide "on its way" block — only shown for diy-* sources */
   .ty-download {
     border: 1px solid rgba(var(--theme-rgb), 0.28);
     background: rgba(var(--theme-rgb), 0.05);
@@ -110,12 +101,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--white);
     line-height: 1.08;
     letter-spacing: 0.01em;
-    margin-bottom: 30px;
-  }
-  .ty-dl-btn {
-    background: var(--theme);
-    border-color: var(--theme);
-    color: var(--black);
+    margin-bottom: 22px;
   }
   .ty-dl-note {
     font-family: 'Cormorant Garamond', serif;
